@@ -88,6 +88,10 @@ func (hms *HotelManagmentSystem) CancelReservation(resId int) error {
 	if !exists {
 		return fmt.Errorf(" reservation doesnt exist")
 	}
+
+	if data.Room.Status == Available {
+		return fmt.Errorf("cannot cancel reservation after checkout")
+	}
 	err := data.CancelReservation()
 	if err != nil {
 		return err
@@ -127,3 +131,15 @@ func (hms *HotelManagmentSystem) CheckOut(resId int, payment payment.Payment) er
 	return data.Room.CheckOUT()
 
 }
+
+// func (hms *HotelManagmentSystem) IsAvailable(roomId int, checkin, checkout time.Time) (bool, error) {
+
+// 	data, exists := hms.Rooms[roomId]
+// 	if !exists {
+// 		return false, fmt.Errorf("room is already booked for selected dates")
+// 	}
+
+// 	if data.Status != Available || checkin.Before(time.Now()) || checkin.After(checkout) || checkout.Before(checkin) {
+//     return false ,
+// 	}
+// }
