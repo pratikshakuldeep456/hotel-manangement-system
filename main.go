@@ -15,16 +15,18 @@ func main() {
 	hmss.AddGuest(Guest1)
 	hmss.AddGuest(Guest2)
 
+	fmt.Println("iofihfg")
 	room1 := hms.NewRoom(hms.DELUXE, hms.Available, 100)
 	hmss.AddRoom(room1)
 
 	room2 := hms.NewRoom(hms.DELUXE, hms.Available, 100)
 	hmss.AddRoom(room2)
-
+	fmt.Println("iofihfg")
 	checkInDate := time.Now()
 	checkOutDate := checkInDate.AddDate(0, 0, 3)
 	//BookRoom
 	data, err := hmss.BookRoom(Guest1, room1, checkInDate, checkOutDate)
+	fmt.Println(data)
 	if err != nil {
 		fmt.Print(err)
 	}

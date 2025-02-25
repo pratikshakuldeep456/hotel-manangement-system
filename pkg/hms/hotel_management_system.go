@@ -76,9 +76,9 @@ func (hms *HotelManagmentSystem) BookRoom(guest *Guest, room *Room, checkInDate,
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Println("testing")
 	reservation := NewReservation(guest, room, checkInDate, checkOutDate)
-	//hms.Reservations[resId].Status = ReservationStatus(Booked)
+	hms.Reservations[reservation.ID] = reservation
 
 	return reservation, nil
 }
@@ -123,6 +123,7 @@ func (hms *HotelManagmentSystem) CheckOut(resId int, payment payment.Payment) er
 	calculatePrice := days * (float64(data.Room.Price))
 
 	payment.Pay(int(calculatePrice))
+	fmt.Println("checkout done ")
 	return data.Room.CheckOUT()
 
 }
